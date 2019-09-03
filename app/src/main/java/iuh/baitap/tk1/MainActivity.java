@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText editTextA, editTextB, editTextC;
     TextView textViewResult;
-    Button buttonCalculate;
+    Button buttonCalculate, buttonExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
         addControls();
         addEvents();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(MainActivity.this, "Good bye TS", Toast.LENGTH_LONG).show();
     }
 
     private void addEvents() {
@@ -48,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
                 textViewResult.setText(ptb2.caculate());
             }
         });
+
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void addControls() {
@@ -55,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         editTextB = findViewById(R.id.editTextB);
         editTextC = findViewById(R.id.editTextC);
         buttonCalculate = findViewById(R.id.buttonCalculate);
+        buttonExit = findViewById(R.id.buttonExit);
         textViewResult = findViewById(R.id.textViewResult);
     }
 }
